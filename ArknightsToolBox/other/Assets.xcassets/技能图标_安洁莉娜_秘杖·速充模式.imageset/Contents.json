@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "技能图标_安洁莉娜_秘杖·速充模式.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

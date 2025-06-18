@@ -1,0 +1,1548 @@
+{
+  "精0": [
+    {
+      "level": 1,
+      "exp": 100,
+      "total_exp": 0,
+      "coin": 30,
+      "total_coin": 0
+    },
+    {
+      "level": 2,
+      "exp": 117,
+      "total_exp": 100,
+      "coin": 36,
+      "total_coin": 30
+    },
+    {
+      "level": 3,
+      "exp": 134,
+      "total_exp": 217,
+      "coin": 43,
+      "total_coin": 66
+    },
+    {
+      "level": 4,
+      "exp": 151,
+      "total_exp": 351,
+      "coin": 50,
+      "total_coin": 109
+    },
+    {
+      "level": 5,
+      "exp": 168,
+      "total_exp": 502,
+      "coin": 57,
+      "total_coin": 159
+    },
+    {
+      "level": 6,
+      "exp": 185,
+      "total_exp": 670,
+      "coin": 65,
+      "total_coin": 216
+    },
+    {
+      "level": 7,
+      "exp": 202,
+      "total_exp": 855,
+      "coin": 73,
+      "total_coin": 281
+    },
+    {
+      "level": 8,
+      "exp": 219,
+      "total_exp": 1057,
+      "coin": 81,
+      "total_coin": 354
+    },
+    {
+      "level": 9,
+      "exp": 236,
+      "total_exp": 1276,
+      "coin": 90,
+      "total_coin": 435
+    },
+    {
+      "level": 10,
+      "exp": 253,
+      "total_exp": 1512,
+      "coin": 99,
+      "total_coin": 525
+    },
+    {
+      "level": 11,
+      "exp": 270,
+      "total_exp": 1765,
+      "coin": 108,
+      "total_coin": 624
+    },
+    {
+      "level": 12,
+      "exp": 287,
+      "total_exp": 2035,
+      "coin": 118,
+      "total_coin": 732
+    },
+    {
+      "level": 13,
+      "exp": 304,
+      "total_exp": 2322,
+      "coin": 128,
+      "total_coin": 850
+    },
+    {
+      "level": 14,
+      "exp": 321,
+      "total_exp": 2626,
+      "coin": 138,
+      "total_coin": 978
+    },
+    {
+      "level": 15,
+      "exp": 338,
+      "total_exp": 2947,
+      "coin": 149,
+      "total_coin": 1116
+    },
+    {
+      "level": 16,
+      "exp": 355,
+      "total_exp": 3285,
+      "coin": 160,
+      "total_coin": 1265
+    },
+    {
+      "level": 17,
+      "exp": 372,
+      "total_exp": 3640,
+      "coin": 182,
+      "total_coin": 1425
+    },
+    {
+      "level": 18,
+      "exp": 389,
+      "total_exp": 4012,
+      "coin": 206,
+      "total_coin": 1607
+    },
+    {
+      "level": 19,
+      "exp": 406,
+      "total_exp": 4401,
+      "coin": 231,
+      "total_coin": 1813
+    },
+    {
+      "level": 20,
+      "exp": 423,
+      "total_exp": 4807,
+      "coin": 258,
+      "total_coin": 2044
+    },
+    {
+      "level": 21,
+      "exp": 440,
+      "total_exp": 5230,
+      "coin": 286,
+      "total_coin": 2302
+    },
+    {
+      "level": 22,
+      "exp": 457,
+      "total_exp": 5670,
+      "coin": 315,
+      "total_coin": 2588
+    },
+    {
+      "level": 23,
+      "exp": 474,
+      "total_exp": 6127,
+      "coin": 346,
+      "total_coin": 2903
+    },
+    {
+      "level": 24,
+      "exp": 491,
+      "total_exp": 6601,
+      "coin": 378,
+      "total_coin": 3249
+    },
+    {
+      "level": 25,
+      "exp": 508,
+      "total_exp": 7092,
+      "coin": 411,
+      "total_coin": 3627
+    },
+    {
+      "level": 26,
+      "exp": 525,
+      "total_exp": 7600,
+      "coin": 446,
+      "total_coin": 4038
+    },
+    {
+      "level": 27,
+      "exp": 542,
+      "total_exp": 8125,
+      "coin": 482,
+      "total_coin": 4484
+    },
+    {
+      "level": 28,
+      "exp": 559,
+      "total_exp": 8667,
+      "coin": 520,
+      "total_coin": 4966
+    },
+    {
+      "level": 29,
+      "exp": 574,
+      "total_exp": 9226,
+      "coin": 557,
+      "total_coin": 5486
+    },
+    {
+      "level": 30,
+      "exp": 589,
+      "total_exp": 9800,
+      "coin": 595,
+      "total_coin": 6043
+    },
+    {
+      "level": 31,
+      "exp": 605,
+      "total_exp": 10389,
+      "coin": 635,
+      "total_coin": 6638
+    },
+    {
+      "level": 32,
+      "exp": 621,
+      "total_exp": 10994,
+      "coin": 677,
+      "total_coin": 7273
+    },
+    {
+      "level": 33,
+      "exp": 637,
+      "total_exp": 11615,
+      "coin": 720,
+      "total_coin": 7950
+    },
+    {
+      "level": 34,
+      "exp": 653,
+      "total_exp": 12252,
+      "coin": 764,
+      "total_coin": 8670
+    },
+    {
+      "level": 35,
+      "exp": 669,
+      "total_exp": 12905,
+      "coin": 809,
+      "total_coin": 9434
+    },
+    {
+      "level": 36,
+      "exp": 685,
+      "total_exp": 13574,
+      "coin": 856,
+      "total_coin": 10243
+    },
+    {
+      "level": 37,
+      "exp": 701,
+      "total_exp": 14259,
+      "coin": 904,
+      "total_coin": 11099
+    },
+    {
+      "level": 38,
+      "exp": 716,
+      "total_exp": 14960,
+      "coin": 952,
+      "total_coin": 12003
+    },
+    {
+      "level": 39,
+      "exp": 724,
+      "total_exp": 15676,
+      "coin": 992,
+      "total_coin": 12955
+    },
+    {
+      "level": 40,
+      "exp": 739,
+      "total_exp": 16400,
+      "coin": 1042,
+      "total_coin": 13947
+    },
+    {
+      "level": 41,
+      "exp": 749,
+      "total_exp": 17139,
+      "coin": 1086,
+      "total_coin": 14989
+    },
+    {
+      "level": 42,
+      "exp": 759,
+      "total_exp": 17888,
+      "coin": 1131,
+      "total_coin": 16075
+    },
+    {
+      "level": 43,
+      "exp": 770,
+      "total_exp": 18647,
+      "coin": 1178,
+      "total_coin": 17206
+    },
+    {
+      "level": 44,
+      "exp": 783,
+      "total_exp": 19417,
+      "coin": 1229,
+      "total_coin": 18384
+    },
+    {
+      "level": 45,
+      "exp": 804,
+      "total_exp": 20200,
+      "coin": 1294,
+      "total_coin": 19613
+    },
+    {
+      "level": 46,
+      "exp": 820,
+      "total_exp": 21004,
+      "coin": 1353,
+      "total_coin": 20907
+    },
+    {
+      "level": 47,
+      "exp": 836,
+      "total_exp": 21824,
+      "coin": 1413,
+      "total_coin": 22260
+    },
+    {
+      "level": 48,
+      "exp": 852,
+      "total_exp": 22660,
+      "coin": 1474,
+      "total_coin": 23673
+    },
+    {
+      "level": 49,
+      "exp": 888,
+      "total_exp": 23512,
+      "coin": 1572,
+      "total_coin": 25147
+    },
+    {
+      "level": 50,
+      "exp": 0,
+      "total_exp": 24400,
+      "coin": 0,
+      "total_coin": 26719
+    }
+  ],
+  "精1": [
+    {
+      "level": 1,
+      "exp": 120,
+      "total_exp": 0,
+      "coin": 48,
+      "total_coin": 0
+    },
+    {
+      "level": 2,
+      "exp": 172,
+      "total_exp": 120,
+      "coin": 71,
+      "total_coin": 48
+    },
+    {
+      "level": 3,
+      "exp": 224,
+      "total_exp": 292,
+      "coin": 95,
+      "total_coin": 119
+    },
+    {
+      "level": 4,
+      "exp": 276,
+      "total_exp": 516,
+      "coin": 120,
+      "total_coin": 214
+    },
+    {
+      "level": 5,
+      "exp": 328,
+      "total_exp": 792,
+      "coin": 146,
+      "total_coin": 334
+    },
+    {
+      "level": 6,
+      "exp": 380,
+      "total_exp": 1120,
+      "coin": 173,
+      "total_coin": 480
+    },
+    {
+      "level": 7,
+      "exp": 432,
+      "total_exp": 1500,
+      "coin": 201,
+      "total_coin": 653
+    },
+    {
+      "level": 8,
+      "exp": 484,
+      "total_exp": 1932,
+      "coin": 231,
+      "total_coin": 854
+    },
+    {
+      "level": 9,
+      "exp": 536,
+      "total_exp": 2416,
+      "coin": 262,
+      "total_coin": 1085
+    },
+    {
+      "level": 10,
+      "exp": 588,
+      "total_exp": 2952,
+      "coin": 293,
+      "total_coin": 1347
+    },
+    {
+      "level": 11,
+      "exp": 640,
+      "total_exp": 3540,
+      "coin": 326,
+      "total_coin": 1640
+    },
+    {
+      "level": 12,
+      "exp": 692,
+      "total_exp": 4180,
+      "coin": 361,
+      "total_coin": 1966
+    },
+    {
+      "level": 13,
+      "exp": 744,
+      "total_exp": 4872,
+      "coin": 396,
+      "total_coin": 2327
+    },
+    {
+      "level": 14,
+      "exp": 796,
+      "total_exp": 5616,
+      "coin": 432,
+      "total_coin": 2723
+    },
+    {
+      "level": 15,
+      "exp": 848,
+      "total_exp": 6412,
+      "coin": 470,
+      "total_coin": 3155
+    },
+    {
+      "level": 16,
+      "exp": 900,
+      "total_exp": 7260,
+      "coin": 508,
+      "total_coin": 3625
+    },
+    {
+      "level": 17,
+      "exp": 952,
+      "total_exp": 8160,
+      "coin": 548,
+      "total_coin": 4133
+    },
+    {
+      "level": 18,
+      "exp": 1004,
+      "total_exp": 9112,
+      "coin": 589,
+      "total_coin": 4681
+    },
+    {
+      "level": 19,
+      "exp": 1056,
+      "total_exp": 10116,
+      "coin": 631,
+      "total_coin": 5270
+    },
+    {
+      "level": 20,
+      "exp": 1108,
+      "total_exp": 11172,
+      "coin": 675,
+      "total_coin": 5901
+    },
+    {
+      "level": 21,
+      "exp": 1160,
+      "total_exp": 12280,
+      "coin": 719,
+      "total_coin": 6576
+    },
+    {
+      "level": 22,
+      "exp": 1212,
+      "total_exp": 13440,
+      "coin": 765,
+      "total_coin": 7295
+    },
+    {
+      "level": 23,
+      "exp": 1264,
+      "total_exp": 14652,
+      "coin": 811,
+      "total_coin": 8060
+    },
+    {
+      "level": 24,
+      "exp": 1316,
+      "total_exp": 15916,
+      "coin": 859,
+      "total_coin": 8871
+    },
+    {
+      "level": 25,
+      "exp": 1368,
+      "total_exp": 17232,
+      "coin": 908,
+      "total_coin": 9730
+    },
+    {
+      "level": 26,
+      "exp": 1420,
+      "total_exp": 18600,
+      "coin": 958,
+      "total_coin": 10638
+    },
+    {
+      "level": 27,
+      "exp": 1472,
+      "total_exp": 20020,
+      "coin": 1010,
+      "total_coin": 11596
+    },
+    {
+      "level": 28,
+      "exp": 1524,
+      "total_exp": 21492,
+      "coin": 1062,
+      "total_coin": 12606
+    },
+    {
+      "level": 29,
+      "exp": 1576,
+      "total_exp": 23016,
+      "coin": 1116,
+      "total_coin": 13668
+    },
+    {
+      "level": 30,
+      "exp": 1628,
+      "total_exp": 24592,
+      "coin": 1171,
+      "total_coin": 14784
+    },
+    {
+      "level": 31,
+      "exp": 1706,
+      "total_exp": 26220,
+      "coin": 1245,
+      "total_coin": 15955
+    },
+    {
+      "level": 32,
+      "exp": 1784,
+      "total_exp": 27926,
+      "coin": 1322,
+      "total_coin": 17200
+    },
+    {
+      "level": 33,
+      "exp": 1862,
+      "total_exp": 29710,
+      "coin": 1400,
+      "total_coin": 18522
+    },
+    {
+      "level": 34,
+      "exp": 1940,
+      "total_exp": 31572,
+      "coin": 1480,
+      "total_coin": 19922
+    },
+    {
+      "level": 35,
+      "exp": 2018,
+      "total_exp": 33512,
+      "coin": 1562,
+      "total_coin": 21402
+    },
+    {
+      "level": 36,
+      "exp": 2096,
+      "total_exp": 35530,
+      "coin": 1645,
+      "total_coin": 22964
+    },
+    {
+      "level": 37,
+      "exp": 2174,
+      "total_exp": 37626,
+      "coin": 1731,
+      "total_coin": 24609
+    },
+    {
+      "level": 38,
+      "exp": 2252,
+      "total_exp": 39800,
+      "coin": 1817,
+      "total_coin": 26340
+    },
+    {
+      "level": 39,
+      "exp": 2330,
+      "total_exp": 42052,
+      "coin": 1906,
+      "total_coin": 28157
+    },
+    {
+      "level": 40,
+      "exp": 2408,
+      "total_exp": 44382,
+      "coin": 1996,
+      "total_coin": 30063
+    },
+    {
+      "level": 41,
+      "exp": 2584,
+      "total_exp": 46790,
+      "coin": 2171,
+      "total_coin": 32059
+    },
+    {
+      "level": 42,
+      "exp": 2760,
+      "total_exp": 49374,
+      "coin": 2349,
+      "total_coin": 34230
+    },
+    {
+      "level": 43,
+      "exp": 2936,
+      "total_exp": 52134,
+      "coin": 2531,
+      "total_coin": 36579
+    },
+    {
+      "level": 44,
+      "exp": 3112,
+      "total_exp": 55070,
+      "coin": 2717,
+      "total_coin": 39110
+    },
+    {
+      "level": 45,
+      "exp": 3288,
+      "total_exp": 58182,
+      "coin": 2907,
+      "total_coin": 41827
+    },
+    {
+      "level": 46,
+      "exp": 3464,
+      "total_exp": 61470,
+      "coin": 3100,
+      "total_coin": 44734
+    },
+    {
+      "level": 47,
+      "exp": 3640,
+      "total_exp": 64934,
+      "coin": 3298,
+      "total_coin": 47834
+    },
+    {
+      "level": 48,
+      "exp": 3816,
+      "total_exp": 68574,
+      "coin": 3499,
+      "total_coin": 51132
+    },
+    {
+      "level": 49,
+      "exp": 3992,
+      "total_exp": 72390,
+      "coin": 3705,
+      "total_coin": 54631
+    },
+    {
+      "level": 50,
+      "exp": 4168,
+      "total_exp": 76382,
+      "coin": 3914,
+      "total_coin": 58336
+    },
+    {
+      "level": 51,
+      "exp": 4344,
+      "total_exp": 80550,
+      "coin": 4127,
+      "total_coin": 62250
+    },
+    {
+      "level": 52,
+      "exp": 4520,
+      "total_exp": 84894,
+      "coin": 4344,
+      "total_coin": 66377
+    },
+    {
+      "level": 53,
+      "exp": 4696,
+      "total_exp": 89414,
+      "coin": 4565,
+      "total_coin": 70721
+    },
+    {
+      "level": 54,
+      "exp": 4890,
+      "total_exp": 94110,
+      "coin": 4807,
+      "total_coin": 75286
+    },
+    {
+      "level": 55,
+      "exp": 5326,
+      "total_exp": 99000,
+      "coin": 5294,
+      "total_coin": 80093
+    },
+    {
+      "level": 56,
+      "exp": 6019,
+      "total_exp": 104326,
+      "coin": 6049,
+      "total_coin": 85387
+    },
+    {
+      "level": 57,
+      "exp": 6312,
+      "total_exp": 110345,
+      "coin": 6413,
+      "total_coin": 91436
+    },
+    {
+      "level": 58,
+      "exp": 6505,
+      "total_exp": 116657,
+      "coin": 6681,
+      "total_coin": 97849
+    },
+    {
+      "level": 59,
+      "exp": 6838,
+      "total_exp": 123162,
+      "coin": 7098,
+      "total_coin": 104530
+    },
+    {
+      "level": 60,
+      "exp": 7391,
+      "total_exp": 130000,
+      "coin": 7753,
+      "total_coin": 111628
+    },
+    {
+      "level": 61,
+      "exp": 7657,
+      "total_exp": 137391,
+      "coin": 8116,
+      "total_coin": 119381
+    },
+    {
+      "level": 62,
+      "exp": 7823,
+      "total_exp": 145048,
+      "coin": 8378,
+      "total_coin": 127497
+    },
+    {
+      "level": 63,
+      "exp": 8089,
+      "total_exp": 152871,
+      "coin": 8752,
+      "total_coin": 135875
+    },
+    {
+      "level": 64,
+      "exp": 8355,
+      "total_exp": 160960,
+      "coin": 9132,
+      "total_coin": 144627
+    },
+    {
+      "level": 65,
+      "exp": 8621,
+      "total_exp": 169315,
+      "coin": 9518,
+      "total_coin": 153759
+    },
+    {
+      "level": 66,
+      "exp": 8887,
+      "total_exp": 177936,
+      "coin": 9909,
+      "total_coin": 163277
+    },
+    {
+      "level": 67,
+      "exp": 9153,
+      "total_exp": 186823,
+      "coin": 10306,
+      "total_coin": 173186
+    },
+    {
+      "level": 68,
+      "exp": 9419,
+      "total_exp": 195976,
+      "coin": 10709,
+      "total_coin": 183492
+    },
+    {
+      "level": 69,
+      "exp": 9605,
+      "total_exp": 205395,
+      "coin": 11027,
+      "total_coin": 194201
+    },
+    {
+      "level": 70,
+      "exp": 9951,
+      "total_exp": 215000,
+      "coin": 11533,
+      "total_coin": 205228
+    },
+    {
+      "level": 71,
+      "exp": 10448,
+      "total_exp": 224951,
+      "coin": 12224,
+      "total_coin": 216761
+    },
+    {
+      "level": 72,
+      "exp": 10945,
+      "total_exp": 235399,
+      "coin": 12926,
+      "total_coin": 228985
+    },
+    {
+      "level": 73,
+      "exp": 11442,
+      "total_exp": 246344,
+      "coin": 13639,
+      "total_coin": 241911
+    },
+    {
+      "level": 74,
+      "exp": 11939,
+      "total_exp": 257786,
+      "coin": 14363,
+      "total_coin": 255550
+    },
+    {
+      "level": 75,
+      "exp": 12436,
+      "total_exp": 269725,
+      "coin": 15097,
+      "total_coin": 269913
+    },
+    {
+      "level": 76,
+      "exp": 12933,
+      "total_exp": 282161,
+      "coin": 15843,
+      "total_coin": 285010
+    },
+    {
+      "level": 77,
+      "exp": 13430,
+      "total_exp": 295094,
+      "coin": 16599,
+      "total_coin": 300853
+    },
+    {
+      "level": 78,
+      "exp": 13927,
+      "total_exp": 308524,
+      "coin": 17367,
+      "total_coin": 317452
+    },
+    {
+      "level": 79,
+      "exp": 14549,
+      "total_exp": 322451,
+      "coin": 18303,
+      "total_coin": 334819
+    },
+    {
+      "level": 80,
+      "exp": 0,
+      "total_exp": 337000,
+      "coin": 0,
+      "total_coin": 353122
+    }
+  ],
+  "精2": [
+    {
+      "level": 1,
+      "exp": 191,
+      "total_exp": 0,
+      "coin": 76,
+      "total_coin": 0
+    },
+    {
+      "level": 2,
+      "exp": 303,
+      "total_exp": 191,
+      "coin": 124,
+      "total_coin": 76
+    },
+    {
+      "level": 3,
+      "exp": 415,
+      "total_exp": 494,
+      "coin": 173,
+      "total_coin": 200
+    },
+    {
+      "level": 4,
+      "exp": 527,
+      "total_exp": 909,
+      "coin": 225,
+      "total_coin": 373
+    },
+    {
+      "level": 5,
+      "exp": 639,
+      "total_exp": 1436,
+      "coin": 279,
+      "total_coin": 598
+    },
+    {
+      "level": 6,
+      "exp": 751,
+      "total_exp": 2075,
+      "coin": 334,
+      "total_coin": 877
+    },
+    {
+      "level": 7,
+      "exp": 863,
+      "total_exp": 2826,
+      "coin": 392,
+      "total_coin": 1211
+    },
+    {
+      "level": 8,
+      "exp": 975,
+      "total_exp": 3689,
+      "coin": 451,
+      "total_coin": 1603
+    },
+    {
+      "level": 9,
+      "exp": 1087,
+      "total_exp": 4664,
+      "coin": 513,
+      "total_coin": 2054
+    },
+    {
+      "level": 10,
+      "exp": 1199,
+      "total_exp": 5751,
+      "coin": 577,
+      "total_coin": 2567
+    },
+    {
+      "level": 11,
+      "exp": 1311,
+      "total_exp": 6950,
+      "coin": 642,
+      "total_coin": 3144
+    },
+    {
+      "level": 12,
+      "exp": 1423,
+      "total_exp": 8261,
+      "coin": 710,
+      "total_coin": 3786
+    },
+    {
+      "level": 13,
+      "exp": 1535,
+      "total_exp": 9684,
+      "coin": 780,
+      "total_coin": 4496
+    },
+    {
+      "level": 14,
+      "exp": 1647,
+      "total_exp": 11219,
+      "coin": 851,
+      "total_coin": 5276
+    },
+    {
+      "level": 15,
+      "exp": 1759,
+      "total_exp": 12866,
+      "coin": 925,
+      "total_coin": 6127
+    },
+    {
+      "level": 16,
+      "exp": 1871,
+      "total_exp": 14625,
+      "coin": 1001,
+      "total_coin": 7052
+    },
+    {
+      "level": 17,
+      "exp": 1983,
+      "total_exp": 16496,
+      "coin": 1079,
+      "total_coin": 8053
+    },
+    {
+      "level": 18,
+      "exp": 2095,
+      "total_exp": 18479,
+      "coin": 1159,
+      "total_coin": 9132
+    },
+    {
+      "level": 19,
+      "exp": 2207,
+      "total_exp": 20574,
+      "coin": 1240,
+      "total_coin": 10291
+    },
+    {
+      "level": 20,
+      "exp": 2319,
+      "total_exp": 22781,
+      "coin": 1324,
+      "total_coin": 11531
+    },
+    {
+      "level": 21,
+      "exp": 2431,
+      "total_exp": 25100,
+      "coin": 1410,
+      "total_coin": 12855
+    },
+    {
+      "level": 22,
+      "exp": 2543,
+      "total_exp": 27531,
+      "coin": 1498,
+      "total_coin": 14265
+    },
+    {
+      "level": 23,
+      "exp": 2655,
+      "total_exp": 30074,
+      "coin": 1588,
+      "total_coin": 15763
+    },
+    {
+      "level": 24,
+      "exp": 2767,
+      "total_exp": 32729,
+      "coin": 1680,
+      "total_coin": 17351
+    },
+    {
+      "level": 25,
+      "exp": 2879,
+      "total_exp": 35496,
+      "coin": 1773,
+      "total_coin": 19031
+    },
+    {
+      "level": 26,
+      "exp": 2991,
+      "total_exp": 38375,
+      "coin": 1869,
+      "total_coin": 20804
+    },
+    {
+      "level": 27,
+      "exp": 3103,
+      "total_exp": 41366,
+      "coin": 1967,
+      "total_coin": 22673
+    },
+    {
+      "level": 28,
+      "exp": 3215,
+      "total_exp": 44469,
+      "coin": 2067,
+      "total_coin": 24640
+    },
+    {
+      "level": 29,
+      "exp": 3327,
+      "total_exp": 47684,
+      "coin": 2169,
+      "total_coin": 26707
+    },
+    {
+      "level": 30,
+      "exp": 3439,
+      "total_exp": 51011,
+      "coin": 2273,
+      "total_coin": 28876
+    },
+    {
+      "level": 31,
+      "exp": 3602,
+      "total_exp": 54450,
+      "coin": 2413,
+      "total_coin": 31149
+    },
+    {
+      "level": 32,
+      "exp": 3765,
+      "total_exp": 58052,
+      "coin": 2556,
+      "total_coin": 33562
+    },
+    {
+      "level": 33,
+      "exp": 3928,
+      "total_exp": 61817,
+      "coin": 2702,
+      "total_coin": 36118
+    },
+    {
+      "level": 34,
+      "exp": 4091,
+      "total_exp": 65745,
+      "coin": 2851,
+      "total_coin": 38820
+    },
+    {
+      "level": 35,
+      "exp": 4254,
+      "total_exp": 69836,
+      "coin": 3003,
+      "total_coin": 41671
+    },
+    {
+      "level": 36,
+      "exp": 4417,
+      "total_exp": 74090,
+      "coin": 3158,
+      "total_coin": 44674
+    },
+    {
+      "level": 37,
+      "exp": 4580,
+      "total_exp": 78507,
+      "coin": 3316,
+      "total_coin": 47832
+    },
+    {
+      "level": 38,
+      "exp": 4743,
+      "total_exp": 83087,
+      "coin": 3477,
+      "total_coin": 51148
+    },
+    {
+      "level": 39,
+      "exp": 4906,
+      "total_exp": 87830,
+      "coin": 3640,
+      "total_coin": 54625
+    },
+    {
+      "level": 40,
+      "exp": 5069,
+      "total_exp": 92736,
+      "coin": 3807,
+      "total_coin": 58265
+    },
+    {
+      "level": 41,
+      "exp": 5232,
+      "total_exp": 97805,
+      "coin": 3976,
+      "total_coin": 62072
+    },
+    {
+      "level": 42,
+      "exp": 5395,
+      "total_exp": 103037,
+      "coin": 4149,
+      "total_coin": 66048
+    },
+    {
+      "level": 43,
+      "exp": 5558,
+      "total_exp": 108432,
+      "coin": 4324,
+      "total_coin": 70197
+    },
+    {
+      "level": 44,
+      "exp": 5721,
+      "total_exp": 113990,
+      "coin": 4502,
+      "total_coin": 74521
+    },
+    {
+      "level": 45,
+      "exp": 5884,
+      "total_exp": 119711,
+      "coin": 4684,
+      "total_coin": 79023
+    },
+    {
+      "level": 46,
+      "exp": 6047,
+      "total_exp": 125595,
+      "coin": 4868,
+      "total_coin": 83707
+    },
+    {
+      "level": 47,
+      "exp": 6210,
+      "total_exp": 131642,
+      "coin": 5055,
+      "total_coin": 88575
+    },
+    {
+      "level": 48,
+      "exp": 6373,
+      "total_exp": 137852,
+      "coin": 5245,
+      "total_coin": 93630
+    },
+    {
+      "level": 49,
+      "exp": 6536,
+      "total_exp": 144225,
+      "coin": 5438,
+      "total_coin": 98875
+    },
+    {
+      "level": 50,
+      "exp": 6699,
+      "total_exp": 150761,
+      "coin": 5634,
+      "total_coin": 104313
+    },
+    {
+      "level": 51,
+      "exp": 6902,
+      "total_exp": 157460,
+      "coin": 5867,
+      "total_coin": 109947
+    },
+    {
+      "level": 52,
+      "exp": 7105,
+      "total_exp": 164362,
+      "coin": 6103,
+      "total_coin": 115814
+    },
+    {
+      "level": 53,
+      "exp": 7308,
+      "total_exp": 171467,
+      "coin": 6343,
+      "total_coin": 121917
+    },
+    {
+      "level": 54,
+      "exp": 7511,
+      "total_exp": 178775,
+      "coin": 6587,
+      "total_coin": 128260
+    },
+    {
+      "level": 55,
+      "exp": 7714,
+      "total_exp": 186286,
+      "coin": 6835,
+      "total_coin": 134847
+    },
+    {
+      "level": 56,
+      "exp": 7917,
+      "total_exp": 194000,
+      "coin": 7086,
+      "total_coin": 141682
+    },
+    {
+      "level": 57,
+      "exp": 8120,
+      "total_exp": 201917,
+      "coin": 7340,
+      "total_coin": 148768
+    },
+    {
+      "level": 58,
+      "exp": 8323,
+      "total_exp": 210037,
+      "coin": 7599,
+      "total_coin": 156108
+    },
+    {
+      "level": 59,
+      "exp": 8526,
+      "total_exp": 218360,
+      "coin": 7861,
+      "total_coin": 163707
+    },
+    {
+      "level": 60,
+      "exp": 8729,
+      "total_exp": 226886,
+      "coin": 8127,
+      "total_coin": 171568
+    },
+    {
+      "level": 61,
+      "exp": 9163,
+      "total_exp": 235615,
+      "coin": 8613,
+      "total_coin": 179695
+    },
+    {
+      "level": 62,
+      "exp": 9597,
+      "total_exp": 244778,
+      "coin": 9108,
+      "total_coin": 188308
+    },
+    {
+      "level": 63,
+      "exp": 10031,
+      "total_exp": 254375,
+      "coin": 9610,
+      "total_coin": 197416
+    },
+    {
+      "level": 64,
+      "exp": 10465,
+      "total_exp": 264406,
+      "coin": 10120,
+      "total_coin": 207026
+    },
+    {
+      "level": 65,
+      "exp": 10899,
+      "total_exp": 274871,
+      "coin": 10637,
+      "total_coin": 217146
+    },
+    {
+      "level": 66,
+      "exp": 11333,
+      "total_exp": 285770,
+      "coin": 11163,
+      "total_coin": 227783
+    },
+    {
+      "level": 67,
+      "exp": 11767,
+      "total_exp": 297103,
+      "coin": 11696,
+      "total_coin": 238946
+    },
+    {
+      "level": 68,
+      "exp": 12201,
+      "total_exp": 308870,
+      "coin": 12238,
+      "total_coin": 250642
+    },
+    {
+      "level": 69,
+      "exp": 12729,
+      "total_exp": 321071,
+      "coin": 12882,
+      "total_coin": 262880
+    },
+    {
+      "level": 70,
+      "exp": 13069,
+      "total_exp": 333800,
+      "coin": 13343,
+      "total_coin": 275762
+    },
+    {
+      "level": 71,
+      "exp": 13747,
+      "total_exp": 346869,
+      "coin": 14159,
+      "total_coin": 289105
+    },
+    {
+      "level": 72,
+      "exp": 14425,
+      "total_exp": 360616,
+      "coin": 14988,
+      "total_coin": 303264
+    },
+    {
+      "level": 73,
+      "exp": 15103,
+      "total_exp": 375041,
+      "coin": 15828,
+      "total_coin": 318252
+    },
+    {
+      "level": 74,
+      "exp": 15781,
+      "total_exp": 390144,
+      "coin": 16681,
+      "total_coin": 334080
+    },
+    {
+      "level": 75,
+      "exp": 16459,
+      "total_exp": 405925,
+      "coin": 17545,
+      "total_coin": 350761
+    },
+    {
+      "level": 76,
+      "exp": 17137,
+      "total_exp": 422384,
+      "coin": 18422,
+      "total_coin": 368306
+    },
+    {
+      "level": 77,
+      "exp": 17815,
+      "total_exp": 439521,
+      "coin": 19311,
+      "total_coin": 386728
+    },
+    {
+      "level": 78,
+      "exp": 18493,
+      "total_exp": 457336,
+      "coin": 20213,
+      "total_coin": 406039
+    },
+    {
+      "level": 79,
+      "exp": 19171,
+      "total_exp": 475829,
+      "coin": 21126,
+      "total_coin": 426252
+    },
+    {
+      "level": 80,
+      "exp": 19849,
+      "total_exp": 495000,
+      "coin": 22092,
+      "total_coin": 447378
+    },
+    {
+      "level": 81,
+      "exp": 21105,
+      "total_exp": 514849,
+      "coin": 23722,
+      "total_coin": 469470
+    },
+    {
+      "level": 82,
+      "exp": 22361,
+      "total_exp": 535954,
+      "coin": 25380,
+      "total_coin": 493192
+    },
+    {
+      "level": 83,
+      "exp": 23617,
+      "total_exp": 558315,
+      "coin": 27065,
+      "total_coin": 518572
+    },
+    {
+      "level": 84,
+      "exp": 24873,
+      "total_exp": 581932,
+      "coin": 28778,
+      "total_coin": 545637
+    },
+    {
+      "level": 85,
+      "exp": 26129,
+      "total_exp": 606805,
+      "coin": 30519,
+      "total_coin": 574415
+    },
+    {
+      "level": 86,
+      "exp": 27385,
+      "total_exp": 632934,
+      "coin": 32287,
+      "total_coin": 604934
+    },
+    {
+      "level": 87,
+      "exp": 28641,
+      "total_exp": 660319,
+      "coin": 34083,
+      "total_coin": 637221
+    },
+    {
+      "level": 88,
+      "exp": 29897,
+      "total_exp": 688960,
+      "coin": 35906,
+      "total_coin": 671304
+    },
+    {
+      "level": 89,
+      "exp": 31143,
+      "total_exp": 718857,
+      "coin": 37745,
+      "total_coin": 707210
+    },
+    {
+      "level": 90,
+      "exp": 0,
+      "total_exp": 750000,
+      "coin": 0,
+      "total_coin": 744955
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "技能图标_浊心斯卡蒂_同归殊途之吟.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
