@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import FirebaseStorage  //  新增：Firebase Storage 支持
 
 // 中间结构体：用于解码 JSON 文件
 struct RecruitCharacter: Codable {
@@ -23,32 +22,16 @@ class CharacterData: ObservableObject {
         loadCharactersFromCloud()
     }
 
-    // MARK: - 从 Firebase 加载
+    // MARK: - 从云端加载（失败时用本机缓存，再失败用内置文件）
     private func loadCharactersFromCloud() {
-        let storage = Storage.storage()
-        let ref = storage.reference(withPath: "json/公开招募干员带标签.json")
-
-        ref.getData(maxSize: 5 * 1024 * 1024) { data, error in
-            if let error = error {
-                print(" Firebase 加载干员数据失败：\(error.localizedDescription)，改用本地文件。")
+        Task {
+            guard let result = await CloudData.json.load(CloudPath.recruitment, as: [RecruitCharacter].self) else {
+                print(" 云端和本机缓存都没有公招数据，改用内置文件。")
                 self.loadCharactersFromLocal()
                 return
             }
-
-            guard let data = data else {
-                print(" Firebase 返回空数据，改用本地文件。")
-                self.loadCharactersFromLocal()
-                return
-            }
-
-            do {
-                let recruitData = try JSONDecoder().decode([RecruitCharacter].self, from: data)
-                self.parseCharacters(from: recruitData)
-                print(" 已从 Firebase 加载公开招募干员数据，共 \(recruitData.count) 条。")
-            } catch {
-                print(" Firebase JSON 解码失败：\(error.localizedDescription)，改用本地文件。")
-                self.loadCharactersFromLocal()
-            }
+            self.parseCharacters(from: result.value)
+            print(" 已从\(result.source == .cloud ? " Firebase " : "本机缓存")加载公开招募干员数据，共 \(result.value.count) 条。")
         }
     }
 

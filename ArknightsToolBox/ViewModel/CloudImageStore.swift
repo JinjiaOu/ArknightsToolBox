@@ -29,6 +29,16 @@ final class CloudImageStore {
         return url
     }()
 
+    private let staleKey = "CloudImageStaleBefore"
+
+    /// 把现有缓存全部标记为过期：下次显示时重新向云端取，取不到就继续用旧图。
+    /// 不直接删除，所以刷新后断网也不会丢图。
+    func markAllStale() {
+        memory.removeAllObjects()
+        lock.lock(); misses.removeAll(); lock.unlock()
+        UserDefaults.standard.set(Date(), forKey: staleKey)
+    }
+
     /// 同步读内存缓存，用于视图首次渲染时避免闪烁
     func memoryImage(paths: [String]) -> UIImage? {
         for path in paths {
@@ -55,7 +65,8 @@ final class CloudImageStore {
         var stale: UIImage?
         if let data = try? Data(contentsOf: file), let image = UIImage(data: data) {
             let modified = (try? FileManager.default.attributesOfItem(atPath: file.path))?[.modificationDate] as? Date
-            if let modified, Date().timeIntervalSince(modified) < freshInterval {
+            let staleBefore = UserDefaults.standard.object(forKey: staleKey) as? Date ?? .distantPast
+            if let modified, modified > staleBefore, Date().timeIntervalSince(modified) < freshInterval {
                 memory.setObject(image, forKey: key)
                 return image
             }

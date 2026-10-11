@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 import SwiftUI
-import FirebaseStorage   //  新增：用于从 Firebase 读取 JSON
 
 class OperatorMaterialViewModel: ObservableObject {
     @Published var operatorName: String = ""
@@ -49,23 +48,15 @@ class OperatorMaterialViewModel: ObservableObject {
 
     // MARK: - 加载干员列表
     private func loadOperators() {
-        let storage = Storage.storage()
-        let ref = storage.reference(withPath: "json/all_operators.json")
-        ref.getData(maxSize: 5 * 1024 * 1024) { data, error in
-            if let error = error {
-                print(" Firebase 加载 all_operators.json 失败：\(error.localizedDescription)，改用本地文件。")
-                self.loadOperatorsFromLocal()
+        Task {
+            guard let result = await CloudData.json.load(CloudPath.operators, as: [String].self) else {
+                print(" 云端和本机缓存都没有 all_operators.json，改用内置文件。")
+                loadOperatorsFromLocal()
                 return
             }
-            guard let data = data,
-                  let list = try? JSONDecoder().decode([String].self, from: data) else {
-                print(" Firebase 解码 all_operators.json 失败，改用本地文件。")
-                self.loadOperatorsFromLocal()
-                return
-            }
-            DispatchQueue.main.async {
-                self.allOperators = list
-                print(" 已从 Firebase 加载 \(list.count) 个干员。")
+            await MainActor.run {
+                self.allOperators = result.value
+                print(" 已从\(result.source == .cloud ? " Firebase " : "本机缓存")加载 \(result.value.count) 个干员。")
             }
         }
     }
@@ -86,14 +77,14 @@ class OperatorMaterialViewModel: ObservableObject {
     // MARK: - 加载材料稀有度：先用本地（立即可用），再用云端数据覆盖（包含新材料）
     private func loadMaterialRarities() {
         loadMaterialRaritiesFromLocal()
-        Storage.storage().reference(withPath: CloudPath.materials).getData(maxSize: 1024 * 1024) { data, error in
-            guard let data, let list = try? JSONDecoder().decode([MaterialRarity].self, from: data) else {
-                print(" 云端材料稀有度不可用，继续使用本地数据：\(error?.localizedDescription ?? "解码失败")")
+        Task {
+            guard let result = await CloudData.json.load(CloudPath.materials, as: [MaterialRarity].self) else {
+                print(" 云端材料稀有度不可用，继续使用内置数据。")
                 return
             }
-            DispatchQueue.main.async {
-                for item in list { self.materialRarityDict[item.name] = item.rarity }
-                print(" 已从 Firebase 更新材料稀有度：共 \(list.count) 项。")
+            await MainActor.run {
+                for item in result.value { self.materialRarityDict[item.name] = item.rarity }
+                print(" 已从\(result.source == .cloud ? " Firebase " : "本机缓存")更新材料稀有度：共 \(result.value.count) 项。")
             }
         }
     }
@@ -113,23 +104,15 @@ class OperatorMaterialViewModel: ObservableObject {
 
     // MARK: - 加载模组类型
     private func loadModuleTypeData() {
-        let storage = Storage.storage()
-        let ref = storage.reference(withPath: "json/operator_modules_cleaned.json")
-        ref.getData(maxSize: 10 * 1024 * 1024) { data, error in
-            if let error = error {
-                print(" Firebase 加载模组类型失败：\(error.localizedDescription)，改用本地文件。")
-                self.loadModuleTypeDataFromLocal()
+        Task {
+            guard let result = await CloudData.json.load(CloudPath.modules, as: [String: [[String: String]]].self) else {
+                print(" 云端和本机缓存都没有模组类型数据，改用内置文件。")
+                loadModuleTypeDataFromLocal()
                 return
             }
-            guard let data = data,
-                  let dict = try? JSONDecoder().decode([String: [[String: String]]].self, from: data) else {
-                print(" Firebase 解码模组类型 JSON 失败，改用本地文件。")
-                self.loadModuleTypeDataFromLocal()
-                return
-            }
-            DispatchQueue.main.async {
-                self.operatorModuleDict = dict
-                print(" 已从 Firebase 加载模组类型数据。")
+            await MainActor.run {
+                self.operatorModuleDict = result.value
+                print(" 已从\(result.source == .cloud ? " Firebase " : "本机缓存")加载模组类型数据。")
             }
         }
     }

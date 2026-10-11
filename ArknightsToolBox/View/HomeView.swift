@@ -24,6 +24,7 @@ struct HomeView: View {
     @State private var lastUpdateTime: String = UserDefaults.standard.string(forKey: "LastUpdateTime") ?? "暂无记录"
     @State private var isRefreshing = false   // 控制整体刷新状态
     @State private var progressMessage = ""   // 刷新过程中的进度文字
+    @State private var cloudUpdatedText: String?   // 云端数据最后一次同步的时间
 
     let modules: [ModuleItem] = [
         ModuleItem(
@@ -59,7 +60,7 @@ struct HomeView: View {
                         // 底部显示上次更新时间
                         VStack(spacing: 4) {
                             Divider().background(Color.white.opacity(0.3))
-                            Text(isRefreshing && !progressMessage.isEmpty ? progressMessage : "上次更新：\(lastUpdateTime)")
+                            Text(footerText)
                                 .font(.footnote)
                                 .foregroundColor(.gray)
                                 .padding(.bottom, 40)
@@ -68,6 +69,7 @@ struct HomeView: View {
                     .padding(.top)
                 }
                 .background(Color(hex: "#0F0F0F").edgesIgnoringSafeArea(.all))
+                .task { await loadCloudUpdatedAt() }
 
                 // 居中浮层提示
                 if showToast {
@@ -102,7 +104,7 @@ struct HomeView: View {
                 VStack {
                     Button {
                         Task {
-                            await performFullRefresh()
+                            await performRefresh()
                         }
                     } label: {
                         ZStack {
@@ -119,6 +121,14 @@ struct HomeView: View {
                         }
                     }
                     .disabled(isRefreshing)
+                    #if DEBUG
+                    // 仅开发版：长按可执行"抓取 PRTS 并写入云端"的完整同步（需要云端写入权限）
+                    .contextMenu {
+                        Button("更新云端数据（仅开发）") {
+                            Task { await performFullRefresh() }
+                        }
+                    }
+                    #endif
                     .padding()
                     .shadow(color: Color(hex: "#FF8C00").opacity(0.5), radius: 8)
                 }
@@ -126,7 +136,44 @@ struct HomeView: View {
         }
     }
 
-    // MARK: - 刷新流程
+    // MARK: - 页脚文字
+    private var footerText: String {
+        if isRefreshing && !progressMessage.isEmpty { return progressMessage }
+        if let cloudUpdatedText { return "云端数据更新于：\(cloudUpdatedText)" }
+        return "上次刷新：\(lastUpdateTime)"
+    }
+
+    private func loadCloudUpdatedAt() async {
+        if let date = await CloudData.cloudUpdatedAt() { cloudUpdatedText = Self.format(date) }
+    }
+
+    private static func format(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        return formatter.string(from: date)
+    }
+
+    // MARK: - 刷新数据（只读）：重新下载云端数据并缓存到本机，图片缓存按需更新
+    private func performRefresh() async {
+        isRefreshing = true
+        progressMessage = "正在从云端刷新数据..."
+
+        let result = await CloudData.refreshAll()
+        if let date = result.cloudUpdatedAt { cloudUpdatedText = Self.format(date) }
+
+        if result.isOffline {
+            showToastMessage("无法连接云端，继续使用本机已有的数据")
+        } else {
+            updateLastUpdateTime()
+            let partial = result.failedFiles > 0 ? "（\(result.failedFiles) 项没有取到）" : ""
+            showToastMessage(result.hasNewData ? "已更新到最新数据\(partial)" : "数据已是最新\(partial)")
+        }
+
+        progressMessage = ""
+        isRefreshing = false
+    }
+
+    // MARK: - 完整同步（仅开发版）：抓取 PRTS 并写入云端
     private func performFullRefresh() async {
         isRefreshing = true
         progressMessage = "正在检查更新..."
