@@ -6,26 +6,29 @@
 //
 
 import SwiftUI
+import FirebaseStorage
 
 struct MaterialSearchView: View {
     @StateObject var viewModel = OperatorMaterialViewModel()
     @FocusState private var isInputFocused: Bool
+    @State private var isLoading = false
 
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 8) {
+                // 顶部标题
                 Text("干员材料查询")
                     .font(.largeTitle.bold())
                     .foregroundColor(Color(hex: "#FF8C00"))
                     .padding(.top)
                     .padding(.horizontal)
 
+                // 🔍 搜索输入框
                 HStack {
                     TextField("", text: $viewModel.operatorName)
                         .placeholder(when: viewModel.operatorName.isEmpty) {
                             Text("输入干员名称")
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 4)
+                                .foregroundColor(.white.opacity(0.8))
                         }
                         .padding(10)
                         .foregroundColor(.white)
@@ -33,7 +36,6 @@ struct MaterialSearchView: View {
                         .disableAutocorrection(true)
                         .focused($isInputFocused)
 
-                    // 如果有输入内容，显示清除按钮
                     if !viewModel.operatorName.isEmpty {
                         Button(action: {
                             viewModel.operatorName = ""
@@ -52,7 +54,7 @@ struct MaterialSearchView: View {
                 )
                 .padding(.horizontal)
 
-
+                // 📜 搜索建议
                 if !viewModel.suggestions.isEmpty {
                     VStack(spacing: 0) {
                         ForEach(viewModel.suggestions, id: \.self) { name in
@@ -60,10 +62,14 @@ struct MaterialSearchView: View {
                                 viewModel.autoSuggestEnabled = false
                                 viewModel.operatorName = name
                                 viewModel.suggestions = []
+                                isLoading = true
                                 viewModel.fetchMaterials(for: name)
                                 isInputFocused = false
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                                     viewModel.autoSuggestEnabled = true
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    isLoading = false
                                 }
                             }) {
                                 HStack {
@@ -82,24 +88,54 @@ struct MaterialSearchView: View {
                     .padding(.horizontal)
                 }
 
-                if viewModel.selectedOperatorName != nil {
+                // 📦 加载中状态
+                if isLoading {
+                    ZStack {
+                        Color.black.opacity(0.4)
+                            .ignoresSafeArea()
+
+                        VStack(spacing: 12) {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "#FF8C00")))
+                                .scaleEffect(1.6)
+                            Text("加载中...")
+                                .foregroundColor(.white)
+                                .font(.headline)
+                        }
+                        .padding(30)
+                        .background(Color(hex: "#1A1A1A").opacity(0.9))
+                        .cornerRadius(16)
+                    }
+                    .transition(.opacity)
+                    .zIndex(1)
+                }
+
+
+                // 📦 查询结果
+                if let selected = viewModel.selectedOperatorName, !isLoading {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 16) {
-                            if let selected = viewModel.selectedOperatorName {
-                                HStack(spacing: 12) {
-                                    Image("头像_\(selected)")
-                                        .resizable()
-                                        .frame(width: 60, height: 60)
-                                        .clipShape(Circle())
-                                        .overlay(Circle().stroke(Color.white.opacity(0.6), lineWidth: 2))
+                            // 🧍‍♀️ 头像区域
+                            HStack(spacing: 12) {
+                                FirebaseAsyncImage(
+                                    path: "character_logo/头像_\(selected).png",
+                                    fallback: "头像_\(selected)",
+                                    width: 60,
+                                    height: 60,
+                                    cornerRadius: 30
+                                )
+                                .id("avatar-\(selected)") // 强制刷新
+                                .transition(.opacity.combined(with: .scale))
+                                .animation(.easeInOut(duration: 0.25), value: selected)
+                                .overlay(Circle().stroke(Color.white.opacity(0.6), lineWidth: 2))
 
-                                    Text(selected)
-                                        .font(.title2.bold())
-                                        .foregroundColor(.white)
-                                }
-                                .padding(.horizontal)
+                                Text(selected)
+                                    .font(.title2.bold())
+                                    .foregroundColor(.white)
                             }
+                            .padding(.horizontal)
 
+                            // 精英化材料
                             if !viewModel.eliteMaterials.isEmpty {
                                 Text("【精英化材料】")
                                     .font(.title3.bold())
@@ -107,6 +143,7 @@ struct MaterialSearchView: View {
                                 materialBlock(viewModel.eliteMaterials)
                             }
 
+                            // 技能升级材料
                             if !viewModel.skillMaterials.isEmpty {
                                 Text("【技能升级材料】")
                                     .font(.title3.bold())
@@ -114,6 +151,7 @@ struct MaterialSearchView: View {
                                 groupedSkillMaterialsBlock(viewModel.skillMaterials)
                             }
 
+                            // 模组材料
                             if !viewModel.moduleMaterials.isEmpty {
                                 Text("【模组材料】")
                                     .font(.title3.bold())
@@ -127,6 +165,9 @@ struct MaterialSearchView: View {
                         .cornerRadius(12)
                         .padding(.horizontal)
                     }
+                    .id(selected) // 每次切换干员时完全刷新 ScrollView
+                    .transition(.opacity)
+                    .animation(.easeInOut(duration: 0.3), value: selected)
                 }
 
                 Spacer()
@@ -135,20 +176,17 @@ struct MaterialSearchView: View {
         }
     }
 
+    // MARK: - 普通材料（本地图）
     func materialBlock(_ data: [String: [(String, String)]]) -> some View {
-        ForEach(data.sorted(by: { materialKeyPriority($0.key) < materialKeyPriority($1.key) }), id: \.key) { key, items in
+        ForEach(data.sorted(by: { $0.key < $1.key }), id: \.key) { key, items in
             VStack(alignment: .leading, spacing: 4) {
-                Text(" \(displayKeyTitle(key, skillNames: viewModel.skillNames))")
+                Text(" \(key)")
                     .font(.body.bold())
                     .foregroundColor(.white)
 
                 ForEach(items, id: \.0) { matName, count in
                     HStack(spacing: 8) {
-                        Image(matName)
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .clipShape(RoundedRectangle(cornerRadius: 4))
-
+                        MaterialIconView(name: matName)
                         Text("\(matName) × \(count)")
                             .font(.callout)
                             .foregroundColor(viewModel.rarityColor(for: matName))
@@ -156,27 +194,31 @@ struct MaterialSearchView: View {
                 }
             }
             .padding(.top, 4)
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 
+    // MARK: - 技能图标（Firebase）
     @ViewBuilder
     func groupedSkillMaterialsBlock(_ data: [String: [(String, String)]]) -> some View {
-        let grouped = Dictionary(grouping: data.sorted(by: { materialKeyPriority($0.key) < materialKeyPriority($1.key) })) { entry in
+        let grouped = Dictionary(grouping: data) { entry in
             extractSkillIndex(from: entry.key) ?? -1
         }
 
         ForEach(grouped.keys.sorted(), id: \.self) { index in
-            if index == -1 {
-                EmptyView()
-            } else if let skillName = viewModel.skillNames[safe: index], let op = viewModel.selectedOperatorName {
+            if index != -1,
+               let skillName = viewModel.skillNames[safe: index],
+               let op = viewModel.selectedOperatorName {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack(spacing: 8) {
-                        Image("技能图标_\(op)_\(skillName)")
-                            .resizable()
-                            .frame(width: 32, height: 32)
-                            .clipShape(RoundedRectangle(cornerRadius: 6))
-
+                        FirebaseAsyncImage(
+                            paths: CloudPath.skillIconCandidates(operatorName: op, skill: skillName)
+                                .map { "\(CloudPath.skillIconFolder)/\($0)" },
+                            fallback: "技能图标_\(op)_\(skillName)",
+                            width: 32,
+                            height: 32,
+                            cornerRadius: 6
+                        )
+                        .id("skill-\(op)-\(skillName)") // 强制刷新技能图
                         Text(skillName)
                             .font(.body.bold())
                             .foregroundColor(.white)
@@ -187,14 +229,9 @@ struct MaterialSearchView: View {
                             Text(viewModel.specializationLevelText(for: key.dropFirst()))
                                 .font(.callout.bold())
                                 .foregroundColor(Color(hex: "#FF8C00"))
-
                             ForEach(items, id: \.0) { matName, count in
                                 HStack(spacing: 8) {
-                                    Image(matName)
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .clipShape(RoundedRectangle(cornerRadius: 4))
-
+                                    MaterialIconView(name: matName)
                                     Text("\(matName) × \(count)")
                                         .font(.callout)
                                         .foregroundColor(viewModel.rarityColor(for: matName))
@@ -204,49 +241,48 @@ struct MaterialSearchView: View {
                     }
                 }
                 .padding(.top, 6)
-                .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
     }
 
+    // MARK: - 模组图标（Firebase）
     @ViewBuilder
     func groupedModuleMaterialsBlock(_ modules: [(String, [String: [(String, String)]])]) -> some View {
         ForEach(modules, id: \.0) { modName, stages in
-            if stages.isEmpty {
-                EmptyView()
-            } else {
+            if !stages.isEmpty {
                 VStack(alignment: .leading, spacing: 8) {
-                    // 模组标题 + 类型图标（自动处理希腊字母）
                     HStack(spacing: 8) {
                         if let op = viewModel.selectedOperatorName,
                            let rawType = viewModel.getModuleType(for: op, moduleName: modName) {
+
                             let iconName = viewModel.normalizeType(rawType)
-                            Image(iconName)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 50, height: 50)
-                                .clipShape(RoundedRectangle(cornerRadius: 6))
+                            let fullPath = "module_icons/\(iconName).png"
+                            let _ = print("🧩 模组图标检查：干员=\(op)，模组=\(modName)，rawType=\(rawType)，iconName=\(iconName)，Firebase路径=\(fullPath)")
+
+                            FirebaseAsyncImage(
+                                path: fullPath,
+                                fallback: iconName,
+                                width: 50,
+                                height: 50,
+                                cornerRadius: 6
+                            )
+                            .id("module-\(op)-\(modName)")
                         }
+
 
                         Text("模组 “\(modName)”")
                             .font(.body.bold())
                             .foregroundColor(.white)
                     }
 
-                    // 材料阶段
-                    ForEach(stages.sorted(by: { stageKeyPriority($0.key) < stageKeyPriority($1.key) }), id: \.key) { stage, items in
+                    ForEach(stages.sorted(by: { $0.key < $1.key }), id: \.key) { stage, items in
                         VStack(alignment: .leading, spacing: 2) {
                             Text(stageDisplayName(stage))
                                 .font(.callout.bold())
                                 .foregroundColor(Color(hex: "#FF8C00"))
-
                             ForEach(items, id: \.0) { matName, count in
                                 HStack(spacing: 8) {
-                                    Image(matName)
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .clipShape(RoundedRectangle(cornerRadius: 4))
-
+                                    MaterialIconView(name: matName)
                                     Text("\(matName) × \(count)")
                                         .font(.callout)
                                         .foregroundColor(viewModel.rarityColor(for: matName))
@@ -256,11 +292,11 @@ struct MaterialSearchView: View {
                     }
                 }
                 .padding(.top, 6)
-                .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
     }
 
+    // MARK: - 工具函数
     func extractSkillIndex(from key: String) -> Int? {
         switch key.prefix(1) {
         case "一": return 0
@@ -268,52 +304,6 @@ struct MaterialSearchView: View {
         case "三": return 2
         default: return nil
         }
-    }
-
-    func materialKeyPriority(_ key: String) -> Int {
-        if key == "精1" { return 1 }
-        if key == "精2" { return 2 }
-
-        let mapping = ["一": 1, "二": 2, "三": 3]
-        let prefix = String(key.prefix(1))
-        let suffix = String(key.dropFirst())
-
-        if let base = mapping[prefix], let level = Int(suffix) {
-            return 100 + base * 10 + level
-        }
-
-        if let n = Int(key) {
-            return 10 + n
-        }
-
-        return 9999
-    }
-
-    func stageKeyPriority(_ key: String) -> Int {
-        switch key {
-        case "材料消耗": return 1
-        case "材料消耗2": return 2
-        case "材料消耗3": return 3
-        default: return 999
-        }
-    }
-
-    func displayKeyTitle(_ key: String, skillNames: [String]) -> String {
-        if key == "精1" { return "精1" }
-        if key == "精2" { return "精2" }
-        if let n = Int(key) { return "等级 \(n)" }
-
-        if key.hasPrefix("一") {
-            return "\(skillNames[safe: 0] ?? "第1技能") \(viewModel.specializationLevelText(for: key.dropFirst()))"
-        }
-        if key.hasPrefix("二") {
-            return "\(skillNames[safe: 1] ?? "第2技能") \(viewModel.specializationLevelText(for: key.dropFirst()))"
-        }
-        if key.hasPrefix("三") {
-            return "\(skillNames[safe: 2] ?? "第3技能") \(viewModel.specializationLevelText(for: key.dropFirst()))"
-        }
-
-        return key
     }
 
     func stageDisplayName(_ key: String) -> String {

@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import FirebaseStorage   //  新增：用于从 Firebase 读取 JSON
 
 class OperatorMaterialViewModel: ObservableObject {
     @Published var operatorName: String = ""
@@ -20,7 +21,7 @@ class OperatorMaterialViewModel: ObservableObject {
     @Published var skillNames: [String] = []
 
     private var allOperators: [String] = []
-    private var materialRarityDict: [String: Int] = [:]
+    @Published private var materialRarityDict: [String: Int] = [:]
     private var operatorModuleDict: [String: [[String: String]]] = [:]
     private var cancellables = Set<AnyCancellable>()
 
@@ -34,6 +35,7 @@ class OperatorMaterialViewModel: ObservableObject {
         loadMaterialRarities()
         loadModuleTypeData()
 
+        // 自动建议功能
         $operatorName
             .debounce(for: 0.2, scheduler: DispatchQueue.main)
             .sink { [weak self] input in
@@ -45,38 +47,107 @@ class OperatorMaterialViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
+    // MARK: - 加载干员列表
     private func loadOperators() {
-        guard let url = Bundle.main.url(forResource: "all_operators", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let list = try? JSONDecoder().decode([String].self, from: data) else { return }
-        allOperators = list
+        let storage = Storage.storage()
+        let ref = storage.reference(withPath: "json/all_operators.json")
+        ref.getData(maxSize: 5 * 1024 * 1024) { data, error in
+            if let error = error {
+                print(" Firebase 加载 all_operators.json 失败：\(error.localizedDescription)，改用本地文件。")
+                self.loadOperatorsFromLocal()
+                return
+            }
+            guard let data = data,
+                  let list = try? JSONDecoder().decode([String].self, from: data) else {
+                print(" Firebase 解码 all_operators.json 失败，改用本地文件。")
+                self.loadOperatorsFromLocal()
+                return
+            }
+            DispatchQueue.main.async {
+                self.allOperators = list
+                print(" 已从 Firebase 加载 \(list.count) 个干员。")
+            }
+        }
     }
 
+    private func loadOperatorsFromLocal() {
+        guard let url = Bundle.main.url(forResource: "all_operators", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let list = try? JSONDecoder().decode([String].self, from: data) else {
+            print(" 无法从本地加载 all_operators.json。")
+            return
+        }
+        DispatchQueue.main.async {
+            self.allOperators = list
+            print(" 已从本地加载 \(list.count) 个干员。")
+        }
+    }
+
+    // MARK: - 加载材料稀有度：先用本地（立即可用），再用云端数据覆盖（包含新材料）
     private func loadMaterialRarities() {
+        loadMaterialRaritiesFromLocal()
+        Storage.storage().reference(withPath: CloudPath.materials).getData(maxSize: 1024 * 1024) { data, error in
+            guard let data, let list = try? JSONDecoder().decode([MaterialRarity].self, from: data) else {
+                print(" 云端材料稀有度不可用，继续使用本地数据：\(error?.localizedDescription ?? "解码失败")")
+                return
+            }
+            DispatchQueue.main.async {
+                for item in list { self.materialRarityDict[item.name] = item.rarity }
+                print(" 已从 Firebase 更新材料稀有度：共 \(list.count) 项。")
+            }
+        }
+    }
+
+    private func loadMaterialRaritiesFromLocal() {
         guard let url = Bundle.main.url(forResource: "arknights_materials_rarity", withExtension: "json"),
               let data = try? Data(contentsOf: url),
               let list = try? JSONDecoder().decode([MaterialRarity].self, from: data) else {
-            print("无法加载材料稀有度 JSON")
+            print(" 无法加载材料稀有度 JSON。")
             return
         }
-
         for item in list {
             materialRarityDict[item.name] = item.rarity
         }
-
-        print("已加载材料稀有度：共 \(materialRarityDict.count) 项")
+        print(" 已加载材料稀有度：共 \(materialRarityDict.count) 项。")
     }
 
+    // MARK: - 加载模组类型
     private func loadModuleTypeData() {
+        let storage = Storage.storage()
+        let ref = storage.reference(withPath: "json/operator_modules_cleaned.json")
+        ref.getData(maxSize: 10 * 1024 * 1024) { data, error in
+            if let error = error {
+                print(" Firebase 加载模组类型失败：\(error.localizedDescription)，改用本地文件。")
+                self.loadModuleTypeDataFromLocal()
+                return
+            }
+            guard let data = data,
+                  let dict = try? JSONDecoder().decode([String: [[String: String]]].self, from: data) else {
+                print(" Firebase 解码模组类型 JSON 失败，改用本地文件。")
+                self.loadModuleTypeDataFromLocal()
+                return
+            }
+            DispatchQueue.main.async {
+                self.operatorModuleDict = dict
+                print(" 已从 Firebase 加载模组类型数据。")
+            }
+        }
+    }
+
+    private func loadModuleTypeDataFromLocal() {
         guard let url = Bundle.main.url(forResource: "operator_modules_cleaned", withExtension: "json"),
               let data = try? Data(contentsOf: url),
               let dict = try? JSONDecoder().decode([String: [[String: String]]].self, from: data) else {
-            print(" 无法加载模组类型 JSON")
+            print(" 无法从本地加载 operator_modules_cleaned.json。")
             return
         }
-        self.operatorModuleDict = dict
+        DispatchQueue.main.async {
+            self.operatorModuleDict = dict
+            print(" 已从本地加载模组类型数据。")
+        }
     }
 
+    // MARK: - 其他功能保持不变
     func getModuleType(for operatorName: String, moduleName: String) -> String? {
         guard let modules = operatorModuleDict[operatorName] else { return nil }
         return modules.first(where: { $0["名称"] == moduleName })?["类型"]
@@ -93,12 +164,12 @@ class OperatorMaterialViewModel: ObservableObject {
 
     func rarityColor(for material: String) -> Color {
         switch materialRarityDict[material] {
-        case 4: return Color(hex: "#FFD700") // 金
-        case 3: return Color(hex: "#C678DD") // 紫
-        case 2: return Color(hex: "#61AFEF") // 蓝
-        case 1: return Color(hex: "#98C379") // 绿
-        case 0: return Color(hex: "#7F848E") // 灰
-        default: return Color.white          // 未知材料 fallback
+        case 4: return Color(hex: "#FFD700")
+        case 3: return Color(hex: "#C678DD")
+        case 2: return Color(hex: "#61AFEF")
+        case 1: return Color(hex: "#98C379")
+        case 0: return Color(hex: "#7F848E")
+        default: return Color.white
         }
     }
 

@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import Firebase   // 新增：导入 Firebase
 
 @main
 struct ArknightsToolBoxApp: App {
     
     init() {
-        // 修改 SegmentedPicker 的未选中文字颜色为白色，选中为黑色
+        // 初始化 Firebase
+        FirebaseApp.configure()
+        
+        // 修改 SegmentedPicker 样式：未选中白色，选中黑色
         let normalAttrs: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white
         ]

@@ -26,7 +26,6 @@ extension Character {
             return Color.white
         }
     }
-
 }
 
 struct CombinationResultView: View {
@@ -34,7 +33,7 @@ struct CombinationResultView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            // 标签展示
+            // 🔸 标签展示
             HStack(spacing: 8) {
                 ForEach(combination.combinationTags, id: \.self) { tag in
                     Text(tag)
@@ -46,6 +45,7 @@ struct CombinationResultView: View {
                 }
             }
 
+            // 🔸 干员结果
             VStack(alignment: .leading, spacing: 8) {
                 Text(combination.starLevel)
                     .foregroundColor(Color(hex: "#FF8C00"))
@@ -54,12 +54,16 @@ struct CombinationResultView: View {
                 FlowLayout(spacing: 8) {
                     ForEach(combination.possibleCharacters) { character in
                         HStack(spacing: 6) {
-                            Image(character.imageName)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 32, height: 32)
-                                .clipShape(Circle())
-                                .overlay(Circle().stroke(Color.white.opacity(0.6), lineWidth: 1))
+                            // ✅ 改为 Firebase 云端头像 + 本地备份
+                            // 云端文件名与干员名一致（含 . 和 -），不能替换字符
+                            FirebaseAsyncImage(
+                                path: "character_logo/头像_\(character.name).png", // 云端头像路径
+                                fallback: character.imageName,               // 本地 Assets 备用图
+                                width: 32,
+                                height: 32,
+                                cornerRadius: 16
+                            )
+                            .id("avatar-\(character.name)") // ✅ 确保切换时强制刷新
 
                             Text(character.name)
                                 .foregroundColor(character.getStarColor())
@@ -93,7 +97,7 @@ struct ResultView: View {
             Color(hex: "#0F0F0F").ignoresSafeArea()
 
             VStack(spacing: 16) {
-                // 顶部栏
+                // 🔹 顶部栏
                 HStack {
                     Spacer()
                     Button("关闭") {
@@ -107,6 +111,7 @@ struct ResultView: View {
                     .font(.system(size: 24, weight: .bold))
                     .foregroundColor(Color(hex: "#FF8C00"))
 
+                // 🔹 结果列表
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
                         ForEach(viewModel.tagCombinations) { result in
@@ -124,4 +129,3 @@ struct ResultView: View {
 #Preview {
     ResultView(viewModel: ResultViewModel())
 }
-

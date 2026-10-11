@@ -61,13 +61,13 @@ class ResultViewModel: ObservableObject {
         var results: [TagCombinationResult] = []
         let nonStarTags = getNonStarTags()
         
-        // Only proceed if there are non-star tags selected
-        if nonStarTags.isEmpty {
+        // 没选非星级标签就清空结果
+        guard !nonStarTags.isEmpty else {
             tagCombinations = []
             return
         }
         
-        // Single tag combinations
+        // MARK: - 单标签组合
         for tag in nonStarTags {
             let matchingChars = characterData.characters.filter { character in
                 let charTags = character.getTagsAsStrings()
@@ -75,10 +75,8 @@ class ResultViewModel: ObservableObject {
             }
             
             if !matchingChars.isEmpty {
-                let sortedChars = matchingChars.sorted { char1, char2 in
-                    let star1 = starLevelToInt(char1.starLevel.rawValue)
-                    let star2 = starLevelToInt(char2.starLevel.rawValue)
-                    return star1 > star2
+                let sortedChars = matchingChars.sorted {
+                    starLevelToInt($0.starLevel.rawValue) > starLevelToInt($1.starLevel.rawValue)
                 }
                 
                 results.append(TagCombinationResult(
@@ -89,42 +87,78 @@ class ResultViewModel: ObservableObject {
             }
         }
         
-        // Two tag combinations
-        for i in 0..<nonStarTags.count {
-            for j in (i+1)..<nonStarTags.count {
-                let tag1 = nonStarTags[i]
-                let tag2 = nonStarTags[j]
-                
-                let matchingChars = characterData.characters.filter { character in
-                    let charTags = character.getTagsAsStrings()
-                    return charTags.contains(tag1) &&
-                           charTags.contains(tag2) &&
-                           isCharacterStarAllowed(character)
-                }
-                
-                if !matchingChars.isEmpty {
-                    let sortedChars = matchingChars.sorted { char1, char2 in
-                        let star1 = starLevelToInt(char1.starLevel.rawValue)
-                        let star2 = starLevelToInt(char2.starLevel.rawValue)
-                        return star1 > star2
+        // MARK: - 双标签组合
+        if nonStarTags.count >= 2 {
+            for i in 0..<nonStarTags.count {
+                for j in (i+1)..<nonStarTags.count {
+                    let tag1 = nonStarTags[i]
+                    let tag2 = nonStarTags[j]
+                    
+                    let matchingChars = characterData.characters.filter { character in
+                        let charTags = character.getTagsAsStrings()
+                        return charTags.contains(tag1) &&
+                               charTags.contains(tag2) &&
+                               isCharacterStarAllowed(character)
                     }
                     
-                    results.append(TagCombinationResult(
-                        combinationTags: [tag1, tag2],
-                        starLevel: sortedChars[0].starLevel.rawValue,
-                        possibleCharacters: sortedChars
-                    ))
+                    if !matchingChars.isEmpty {
+                        let sortedChars = matchingChars.sorted {
+                            starLevelToInt($0.starLevel.rawValue) > starLevelToInt($1.starLevel.rawValue)
+                        }
+                        
+                        results.append(TagCombinationResult(
+                            combinationTags: [tag1, tag2],
+                            starLevel: sortedChars[0].starLevel.rawValue,
+                            possibleCharacters: sortedChars
+                        ))
+                    }
                 }
             }
         }
         
-        // Sort combinations by star level
-        tagCombinations = results.sorted { result1, result2 in
-            let star1 = starLevelToInt(result1.starLevel)
-            let star2 = starLevelToInt(result2.starLevel)
-            return star1 > star2
+        // MARK: - 三标签组合（新增）
+        if nonStarTags.count >= 3 {
+            for i in 0..<nonStarTags.count {
+                for j in (i+1)..<nonStarTags.count {
+                    for k in (j+1)..<nonStarTags.count {
+                        let tag1 = nonStarTags[i]
+                        let tag2 = nonStarTags[j]
+                        let tag3 = nonStarTags[k]
+                        
+                        let matchingChars = characterData.characters.filter { character in
+                            let charTags = character.getTagsAsStrings()
+                            return charTags.contains(tag1) &&
+                                   charTags.contains(tag2) &&
+                                   charTags.contains(tag3) &&
+                                   isCharacterStarAllowed(character)
+                        }
+                        
+                        if !matchingChars.isEmpty {
+                            let sortedChars = matchingChars.sorted {
+                                starLevelToInt($0.starLevel.rawValue) > starLevelToInt($1.starLevel.rawValue)
+                            }
+                            
+                            results.append(TagCombinationResult(
+                                combinationTags: [tag1, tag2, tag3],
+                                starLevel: sortedChars[0].starLevel.rawValue,
+                                possibleCharacters: sortedChars
+                            ))
+                        }
+                    }
+                }
+            }
+        }
+        
+        // MARK: - 最终排序：多标签优先 + 星级降序
+        tagCombinations = results.sorted { r1, r2 in
+            if r1.combinationTags.count != r2.combinationTags.count {
+                return r1.combinationTags.count > r2.combinationTags.count
+            } else {
+                return starLevelToInt(r1.starLevel) > starLevelToInt(r2.starLevel)
+            }
         }
     }
+
     
     func resetToMainViewTags() {
         findValidCombinations()

@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Xcode 个人状态与构建产物
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+*.xcarchive
+
+# CocoaPods（Podfile 和 Podfile.lock 要提交，Pods/ 通过 `pod install` 生成）
+Pods/
+
+# 凭据（不要提交）
+.env
+*.p12
+*.pem
+*.mobileprovision
+*serviceAccount*.json
+*firebase_key*.json
+*firebase-adminsdk*.json
