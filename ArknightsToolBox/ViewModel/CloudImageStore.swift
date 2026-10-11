@@ -22,12 +22,16 @@ final class CloudImageStore {
     private let missInterval: TimeInterval = 10 * 60
     private let maxSize: Int64 = 2 * 1024 * 1024
 
-    private lazy var directory: URL = {
+    /// 必须在 init 里初始化：lazy var 在多线程同时首次访问时不是线程安全的，
+    /// 材料页一次并发加载几十个图标，会因此崩溃
+    private let directory: URL
+
+    private init() {
         let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("CloudImages", isDirectory: true)
         try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
-        return url
-    }()
+        directory = url
+    }
 
     private let staleKey = "CloudImageStaleBefore"
 

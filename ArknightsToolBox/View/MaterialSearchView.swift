@@ -224,7 +224,8 @@ struct MaterialSearchView: View {
                             .foregroundColor(.white)
                     }
 
-                    ForEach(grouped[index] ?? [], id: \.key) { key, items in
+                    // Dictionary 的遍历顺序每次启动都不同，必须按等级数字排序，专精一/二/三才会稳定地从上到下
+                    ForEach((grouped[index] ?? []).sorted { skillLevel($0.key) < skillLevel($1.key) }, id: \.key) { key, items in
                         VStack(alignment: .leading, spacing: 2) {
                             Text(viewModel.specializationLevelText(for: key.dropFirst()))
                                 .font(.callout.bold())
@@ -297,6 +298,11 @@ struct MaterialSearchView: View {
     }
 
     // MARK: - 工具函数
+    /// 技能材料键形如 "一8"、"二10"：去掉首字（技能序号）后的数字就是等级
+    func skillLevel(_ key: String) -> Int {
+        Int(key.dropFirst()) ?? Int.max
+    }
+
     func extractSkillIndex(from key: String) -> Int? {
         switch key.prefix(1) {
         case "一": return 0
