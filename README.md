@@ -58,7 +58,8 @@
 
 ## 🛠 构建
 
-项目使用 CocoaPods，请打开 **`ArknightsToolBox.xcworkspace`**（不是 `.xcodeproj`）：
+1. 自行创建 Firebase 项目，下载 `GoogleService-Info.plist` 放到 `ArknightsToolBox/other/`（该文件不在仓库中）。
+2. 项目使用 CocoaPods，请打开 **`ArknightsToolBox.xcworkspace`**（不是 `.xcodeproj`）：
 
 ```bash
 pod install

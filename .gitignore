@@ -11,7 +11,8 @@ build/
 # CocoaPods（Podfile 和 Podfile.lock 要提交，Pods/ 通过 `pod install` 生成）
 Pods/
 
-# 凭据（不要提交）
+# 凭据与项目配置（不要提交）
+GoogleService-Info.plist
 .env
 *.p12
 *.pem
